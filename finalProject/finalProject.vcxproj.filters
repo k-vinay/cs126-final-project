@@ -28,6 +28,7 @@
     <ClCompile Include="Hitbox.cpp">
       <Filter>src\classes</Filter>
     </ClCompile>
+    <ClCompile Include="Enemy.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -218,6 +219,7 @@
     <ClInclude Include="Hitbox.h">
       <Filter>src\classes</Filter>
     </ClInclude>
+    <ClInclude Include="Enemy.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="icon.rc" />

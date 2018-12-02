@@ -180,6 +180,7 @@
     <PostBuildEvent />
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="player.cpp" />
     <ClCompile Include="Hitbox.cpp" />
     <ClCompile Include="src\main.cpp" />
@@ -191,6 +192,7 @@
     <ClCompile Include="..\..\..\..\..\Desktop\work\school work\college\freshman\cs126\final\of_v0.10.0_vs2017_release\addons\ofxAssimpModelLoader\libs\assimp\include\assimp\material.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Enemy.h" />
     <ClInclude Include="player.h" />
     <ClInclude Include="Hitbox.h" />
     <ClInclude Include="src\ofApp.h" />
