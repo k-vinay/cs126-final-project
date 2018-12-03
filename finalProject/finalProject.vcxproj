@@ -181,8 +181,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="Gun.cpp" />
     <ClCompile Include="player.cpp" />
     <ClCompile Include="Hitbox.cpp" />
+    <ClCompile Include="Room.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\ofApp.cpp" />
     <ClCompile Include="..\..\..\..\..\Desktop\work\school work\college\freshman\cs126\final\of_v0.10.0_vs2017_release\addons\ofxAssimpModelLoader\src\ofxAssimpAnimation.cpp" />
@@ -192,9 +194,12 @@
     <ClCompile Include="..\..\..\..\..\Desktop\work\school work\college\freshman\cs126\final\of_v0.10.0_vs2017_release\addons\ofxAssimpModelLoader\libs\assimp\include\assimp\material.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Constants.h" />
     <ClInclude Include="Enemy.h" />
+    <ClInclude Include="Gun.h" />
     <ClInclude Include="player.h" />
     <ClInclude Include="Hitbox.h" />
+    <ClInclude Include="Room.h" />
     <ClInclude Include="src\ofApp.h" />
     <ClInclude Include="..\..\..\..\..\Desktop\work\school work\college\freshman\cs126\final\of_v0.10.0_vs2017_release\addons\ofxAssimpModelLoader\src\ofxAssimpAnimation.h" />
     <ClInclude Include="..\..\..\..\..\Desktop\work\school work\college\freshman\cs126\final\of_v0.10.0_vs2017_release\addons\ofxAssimpModelLoader\src\ofxAssimpMeshHelper.h" />

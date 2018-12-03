@@ -1,4 +1,4 @@
-#include "HitBox.h"
+#include "src/Hitbox.h"
 
 HitBox::HitBox()
 {
