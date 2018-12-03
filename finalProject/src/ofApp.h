@@ -3,11 +3,11 @@
 #include "player.h"
 #include "Enemy.h"
 #include "Constants.h"
+#include "World.h"
 
 class ofApp : public ofBaseApp{
 
 	Player player;
-
 
 	public:
 		void setup();

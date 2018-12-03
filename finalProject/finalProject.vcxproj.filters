@@ -34,7 +34,12 @@
     <ClCompile Include="Room.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="player.cpp" />
+    <ClCompile Include="player.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="World.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -228,7 +233,12 @@
     <ClInclude Include="Room.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="player.h" />
+    <ClInclude Include="player.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="World.h">
+      <Filter>src</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="icon.rc">

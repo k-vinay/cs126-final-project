@@ -192,6 +192,7 @@
     <ClCompile Include="..\..\..\..\..\Desktop\work\school work\college\freshman\cs126\final\of_v0.10.0_vs2017_release\addons\ofxAssimpModelLoader\src\ofxAssimpModelLoader.cpp" />
     <ClCompile Include="..\..\..\..\..\Desktop\work\school work\college\freshman\cs126\final\of_v0.10.0_vs2017_release\addons\ofxAssimpModelLoader\src\ofxAssimpTexture.cpp" />
     <ClCompile Include="..\..\..\..\..\Desktop\work\school work\college\freshman\cs126\final\of_v0.10.0_vs2017_release\addons\ofxAssimpModelLoader\libs\assimp\include\assimp\material.cpp" />
+    <ClCompile Include="World.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Constants.h" />
@@ -247,6 +248,7 @@
     <ClInclude Include="..\..\..\..\..\Desktop\work\school work\college\freshman\cs126\final\of_v0.10.0_vs2017_release\addons\ofxAssimpModelLoader\libs\assimp\include\assimp\vector2.h" />
     <ClInclude Include="..\..\..\..\..\Desktop\work\school work\college\freshman\cs126\final\of_v0.10.0_vs2017_release\addons\ofxAssimpModelLoader\libs\assimp\include\assimp\vector3.h" />
     <ClInclude Include="..\..\..\..\..\Desktop\work\school work\college\freshman\cs126\final\of_v0.10.0_vs2017_release\addons\ofxAssimpModelLoader\libs\assimp\include\assimp\version.h" />
+    <ClInclude Include="World.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="$(OF_ROOT)\libs\openFrameworksCompiled\project\vs\openframeworksLib.vcxproj">

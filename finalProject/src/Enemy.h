@@ -8,6 +8,7 @@ class Enemy
 
 	std::string model_file;
 	ofxAssimpModelLoader model;
+	std::string type;
 
 public:
 	Enemy();
@@ -15,6 +16,6 @@ public:
 
 	void update(float frames);
 
-	virtual std::string getType() = 0;
+	std::string get_type();
 };
 
