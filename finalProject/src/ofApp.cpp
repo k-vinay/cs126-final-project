@@ -4,7 +4,8 @@
 void ofApp::setup()
 {
 	player.setup();
-	//world.setup();
+	world.setup();
+	ofEnableLighting();
 }
 
 //--------------------------------------------------------------
@@ -12,30 +13,43 @@ void ofApp::update()
 {
 	float frames = 1;
 	if (ofGetFrameRate() > 0)
-		frames = kDefaultFramerate / frames;
+		frames = kDefaultFramerate / ofGetFrameRate();
 
-	//player.update(frames);
-	//world.update(frames);
+	player.update(frames);
+	world.update(frames);
+	light.setPosition(player.getPosition());
 }
 
 //--------------------------------------------------------------
-void ofApp::draw(){
+void ofApp::draw()
+{
+	ofEnableDepthTest();
+	ofSetVerticalSync(false);
+	ofSetBackgroundColorHex(0);
 
+	light.enable();
+	player.camera.begin();
+	player.draw();
+	world.draw();
+	player.camera.end();
 }
 
 //--------------------------------------------------------------
-void ofApp::keyPressed(int key){
-
+void ofApp::keyPressed(int key)
+{
+	player.keyPressed(key);
 }
 
 //--------------------------------------------------------------
-void ofApp::keyReleased(int key){
-
+void ofApp::keyReleased(int key)
+{
+	player.keyReleased(key);
 }
 
 //--------------------------------------------------------------
-void ofApp::mouseMoved(int x, int y ){
-
+void ofApp::mouseMoved(int x, int y )
+{
+	player.mouseMoved(x, y);
 }
 
 //--------------------------------------------------------------

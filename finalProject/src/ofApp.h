@@ -9,6 +9,7 @@ class ofApp : public ofBaseApp{
 
 	Player player;
 	World world;
+	ofLight light;
 
 	public:
 		void setup();

@@ -5,8 +5,9 @@
 class World
 {
 	std::vector<Room> rooms;
-
 	ofxAssimpModelLoader map;
+
+	Room* current_room;
 
 public:
 	World();
@@ -14,5 +15,7 @@ public:
 
 	void setup();
 	void update(float frames);
+
+	void draw();
 };
 
