@@ -13,6 +13,7 @@ Player::~Player()
 void Player::setup()
 {
 	camera.setGlobalPosition(spawn);
+
 	ofHideCursor();
 }
 
