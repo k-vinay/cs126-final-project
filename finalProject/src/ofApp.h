@@ -8,6 +8,7 @@
 class ofApp : public ofBaseApp{
 
 	Player player;
+	World world;
 
 	public:
 		void setup();

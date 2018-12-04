@@ -1,13 +1,21 @@
 #include "ofApp.h"
 
 //--------------------------------------------------------------
-void ofApp::setup(){
-	Enemy test = Enemy();
+void ofApp::setup()
+{
+	player.setup();
+	//world.setup();
 }
 
 //--------------------------------------------------------------
-void ofApp::update(){
+void ofApp::update()
+{
+	float frames = 1;
+	if (ofGetFrameRate() > 0)
+		frames = kDefaultFramerate / frames;
 
+	//player.update(frames);
+	//world.update(frames);
 }
 
 //--------------------------------------------------------------

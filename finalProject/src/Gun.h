@@ -10,13 +10,17 @@ class Gun
 	int mag_size;
 	int current_mag;
 	float reload_time;
+	float fire_delay;
+	float time_since_last_shot;
 	float time_since_last_reload;
+	bool can_shoot;
 
 	std::string model_file;
 	ofxAssimpModelLoader model;
 
 public:
-	Gun(std::string n, int m_a, int aps, int ms, std::string model_name);
+	Gun();
+	Gun(std::string gunName, int maxAmmo, int ammoPerShot, int magSize, float reloadTime, float fireDelay, std::string model_name);
 	~Gun();
 
 	void setPosition(ofVec3f pos);

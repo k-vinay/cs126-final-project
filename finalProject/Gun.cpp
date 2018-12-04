@@ -1,15 +1,20 @@
 #include "src/Gun.h"
 
-Gun::Gun(std::string n, int m_a, int aps, int ms, std::string model_name)
+Gun::Gun()
 {
-	name = n;
-	max_ammo = m_a;
-	ammo = max_ammo;
-	ammo_per_shot = aps;
-	mag_size = ms;
-	model_file = model_name;
+}
 
-	//model.loadModel(model_file);
+Gun::Gun(std::string gunName, int maxAmmo, int ammoPerShot, int magSize, float reloadTime, float fireDelay, std::string model_name)
+{
+	name = gunName;
+	max_ammo = maxAmmo;
+	ammo = max_ammo;
+	ammo_per_shot = ammoPerShot;
+	mag_size = magSize;
+	current_mag = mag_size;
+	reload_time = reloadTime;
+	fire_delay = fireDelay;
+	can_shoot = true;
 }
 
 Gun::~Gun()

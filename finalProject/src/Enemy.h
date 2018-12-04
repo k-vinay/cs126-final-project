@@ -1,6 +1,7 @@
 #pragma once
 #include "Hitbox.h"
 #include "ofxAssimpModelLoader.h"
+#include "Gun.h"
 
 class Enemy
 {
@@ -9,6 +10,7 @@ class Enemy
 	std::string model_file;
 	ofxAssimpModelLoader model;
 	std::string type;
+	Gun gun;
 
 public:
 	Enemy();
