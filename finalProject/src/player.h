@@ -4,7 +4,6 @@
 #include "ofMain.h"
 #include "Constants.h"
 #include "Hitbox.h"
-#include "World.h"
 
 class Player
 {

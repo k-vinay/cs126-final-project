@@ -3,7 +3,7 @@
 //--------------------------------------------------------------
 void ofApp::setup()
 {
-	//player.setup(&world);
+	player.setup();
 	world.setup();
 	ofEnableLighting();
 }

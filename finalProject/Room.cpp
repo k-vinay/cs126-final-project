@@ -1,9 +1,5 @@
 #include "src/Room.h"
 
-Room::Room()
-{
-}
-
 Room::Room(ofVec2f small, ofVec2f big, std::vector<Door> doorList, std::vector<Enemy> enemyList, std::vector<ofVec2f> enemySpawnList, std::vector<HitBox> wallList, std::vector<HitBox> pitList)
 {
 	small_corner = small;

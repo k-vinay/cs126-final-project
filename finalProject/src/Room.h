@@ -24,7 +24,6 @@ class Room
 	std::vector<HitBox> pits;
 
 public:
-	Room();
 	Room(ofVec2f small, ofVec2f big, std::vector<Door> doorList, std::vector<Enemy> enemyList, std::vector<ofVec2f> enemySpawnList, std::vector<HitBox> walls, std::vector<HitBox> pits);
 	~Room();
 
