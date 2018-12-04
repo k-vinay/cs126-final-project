@@ -10,8 +10,10 @@ Player::~Player()
 {
 }
 
-void Player::setup()
+void Player::setup(World* world)
 {
+	world_ptr = world;
+
 	camera.setGlobalPosition(spawn);
 	ofHideCursor();
 }

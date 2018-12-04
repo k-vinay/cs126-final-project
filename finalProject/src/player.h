@@ -8,6 +8,8 @@
 
 class Player
 {
+	World* world_ptr;
+
 	HitBox hitbox;
 	int health;
 	std::vector<Gun> guns;
@@ -20,7 +22,7 @@ public:
 	Player();
 	~Player();
 
-	void setup();
+	void setup(World* world);
 	void update(float frames);
 
 	void move(ofVec3f displacement);
