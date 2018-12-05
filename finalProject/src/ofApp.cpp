@@ -28,10 +28,11 @@ void ofApp::draw()
 	ofSetBackgroundColorHex(0);
 
 	light.enable();
-	player.camera.begin();
+	
+	player.begin();
 	player.draw();
 	world.draw();
-	player.camera.end();
+	player.end();
 }
 
 //--------------------------------------------------------------
@@ -53,22 +54,26 @@ void ofApp::mouseMoved(int x, int y )
 }
 
 //--------------------------------------------------------------
-void ofApp::mouseDragged(int x, int y, int button){
+void ofApp::mouseDragged(int x, int y, int button)
+{
 
 }
 
 //--------------------------------------------------------------
-void ofApp::mousePressed(int x, int y, int button){
-
+void ofApp::mousePressed(int x, int y, int button)
+{
+	player.mousePressed(button);
 }
 
 //--------------------------------------------------------------
-void ofApp::mouseReleased(int x, int y, int button){
-
+void ofApp::mouseReleased(int x, int y, int button)
+{
+	player.mouseReleased(button);
 }
 
 //--------------------------------------------------------------
-void ofApp::mouseEntered(int x, int y){
+void ofApp::mouseEntered(int x, int y)
+{
 
 }
 

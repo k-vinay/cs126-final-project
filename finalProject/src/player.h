@@ -15,6 +15,12 @@ class Player
 	std::vector<Gun> guns;
 
 	bool keyDown[255];
+	bool mouse[3];
+
+	bool is_zoomed;
+	bool is_jumping;
+	
+	ofVec3f speed;
 public:
 
 	ofCamera camera;
@@ -25,6 +31,9 @@ public:
 	void setup(World* world);
 	void update(float frames);
 
+	void begin();
+	void end();
+
 	void move(ofVec3f displacement);
 
 	void draw();
@@ -32,6 +41,8 @@ public:
 	void keyPressed(int key);
 	void keyReleased(int key);
 	void mouseMoved(int x, int y);
+	void mousePressed(int button);
+	void mouseReleased(int button);
 
 	ofVec3f getPosition();
 };

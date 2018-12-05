@@ -1,6 +1,7 @@
 #pragma once
 #include "Room.h"
 #include "ofxAssimpModelLoader.h"
+#include "Constants.h"
 
 class World
 {

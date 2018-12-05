@@ -15,40 +15,75 @@ void Player::setup(World* world)
 	world_ptr = world;
 
 	camera.setGlobalPosition(spawn);
+	camera.setFov(kFov);
 	ofHideCursor();
 }
 
 void Player::update(float frames)
 {
-	ofVec3f player_pos = camera.getGlobalPosition();
-	float x = player_pos.x;
-	float y = player_pos.y;
-	float z = player_pos.z;
-
-	if (keyDown['w'])
-		camera.dolly(-kMoveSpeed);
-	if (keyDown['s'])
-		camera.dolly(kMoveSpeed);
-	if (keyDown['a'])
-		camera.truck(-kMoveSpeed);
-	if (keyDown['d'])
-		camera.truck(kMoveSpeed);
-
-	float x_diff = camera.getGlobalPosition().x - x;
-	float y_diff = camera.getGlobalPosition().y - y;
-	float z_diff = camera.getGlobalPosition().z - z;
-
-	camera.setPosition(player_pos);
-
-	if (!(x_diff == 0 && y_diff == 0))
+	if (is_jumping)
 	{
-		float scale = kMoveSpeed / sqrtf((x_diff*x_diff) + (y_diff*y_diff));
-		x_diff *= scale;
-		y_diff *= scale;
+		float z_diff = 0.5*kGravity*frames*frames + frames * speed.z;
+		speed.z += frames * kGravity;
+		move({ frames*speed.x,frames*speed.y,z_diff });
 	}
-	z_diff = 0;
-	
-	move({ frames*x_diff,frames*y_diff,0 });
+	else
+	{
+		ofVec3f player_pos = camera.getGlobalPosition();
+		float x = player_pos.x;
+		float y = player_pos.y;
+		float z = player_pos.z;
+
+		if (keyDown['w'])
+			camera.dolly(-kMoveSpeed);
+		if (keyDown['s'])
+			camera.dolly(kMoveSpeed);
+		if (keyDown['a'])
+			camera.truck(-kMoveSpeed);
+		if (keyDown['d'])
+			camera.truck(kMoveSpeed);
+
+		float x_diff = camera.getGlobalPosition().x - x;
+		float y_diff = camera.getGlobalPosition().y - y;
+		float z_diff = camera.getGlobalPosition().z - z;
+
+		camera.setPosition(player_pos);
+
+		if (!(x_diff == 0 && y_diff == 0))
+		{
+			float scale = kMoveSpeed / sqrtf((x_diff*x_diff) + (y_diff*y_diff));
+			x_diff *= scale;
+			y_diff *= scale;
+		}
+
+		speed.x = x_diff;
+		speed.y = y_diff;
+
+		move({ frames*speed.x,frames*speed.y,0 });
+	}
+
+
+	if (camera.getGlobalPosition().z < kHeight)
+	{
+		is_jumping = false;
+		move({ 0,0,kHeight - camera.getGlobalPosition().z });
+		speed.z = 0;
+	}
+
+	is_zoomed = mouse[2];
+}
+
+void Player::begin()
+{
+	if (is_zoomed)
+		camera.setFov(kZoomFov);
+	camera.begin();
+}
+
+void Player::end()
+{
+	camera.end();
+	camera.setFov(kFov);
 }
 
 void Player::move(ofVec3f displacement)
@@ -77,6 +112,12 @@ void Player::draw()
 void Player::keyPressed(int key)
 {
 	keyDown[key] = true;
+
+	if (keyDown[' '] && speed.length()!=0 && !is_jumping)
+	{
+		is_jumping = true;
+		speed.z = kJumpPower;
+	}
 }
 
 void Player::keyReleased(int key)
@@ -96,6 +137,16 @@ void Player::mouseMoved(int x, int y)
 	//printf("cam: %3.3f, %3.3f, %3.3f\n", heading.x, heading.y, heading.z);
 
 	SetCursorPos(ofGetScreenWidth() / 2, ofGetScreenHeight() / 2);
+}
+
+void Player::mousePressed(int button)
+{
+	mouse[button] = true;
+}
+
+void Player::mouseReleased(int button)
+{
+	mouse[button] = false;
 }
 
 ofVec3f Player::getPosition()
