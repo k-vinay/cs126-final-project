@@ -7,9 +7,9 @@ class World
 	std::vector<Room> rooms;
 	ofxAssimpModelLoader map;
 
+public:
 	Room* current_room;
 
-public:
 	World();
 	~World();
 

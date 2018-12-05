@@ -23,6 +23,16 @@ void Room::update(float frames)
 {
 }
 
+bool Room::isValidPosition(HitBox player)
+{
+	for (HitBox wall : walls)
+	{
+		if (wall.IsHitting(player))
+			return false;
+	}
+	return true;
+}
+
 ofVec2f Room::get_small_corner()
 {
 	return ofVec2f();

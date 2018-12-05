@@ -53,8 +53,21 @@ void Player::update(float frames)
 
 void Player::move(ofVec3f displacement)
 {
-	camera.move(displacement);
-	hitbox.move(displacement.x, displacement.y, displacement.z);
+	hitbox.move(displacement.x, 0,0);
+	bool can_move_x = world_ptr->current_room->isValidPosition(hitbox);
+	if (!can_move_x) hitbox.move(-displacement.x, 0, 0);
+
+	hitbox.move(0, displacement.y, 0);
+	bool can_move_y = world_ptr->current_room->isValidPosition(hitbox);
+	if (!can_move_x) hitbox.move(0, -displacement.y, 0);
+
+	if (can_move_x)
+		camera.move({ displacement.x,0,0 });
+	if (can_move_y)
+		camera.move({ 0,displacement.y,0 });
+
+	hitbox.move(0, 0, displacement.z);
+	camera.move({ 0,0,displacement.z });
 }
 
 void Player::draw()

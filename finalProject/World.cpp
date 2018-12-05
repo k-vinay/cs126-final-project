@@ -2,6 +2,7 @@
 
 World::World()
 {
+	current_room = new Room();
 }
 
 

@@ -29,9 +29,10 @@ public:
 
 	void update(float frames);
 
+	bool isValidPosition(HitBox player);
+
 	ofVec2f get_small_corner();
 	ofVec2f get_big_corner();
 	std::vector<ofVec2f> get_doors();
-
 };
 
