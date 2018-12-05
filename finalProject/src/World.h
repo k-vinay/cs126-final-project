@@ -18,5 +18,7 @@ public:
 	void update(float frames);
 
 	void draw();
+
+	void initializeRooms();
 };
 

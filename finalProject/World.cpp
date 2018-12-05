@@ -1,4 +1,5 @@
 #include "src/World.h"
+#include "src/RoomConstants.h"
 
 World::World()
 {
@@ -16,6 +17,8 @@ void World::setup()
 	map.setPosition(0, 0, 0);
 	map.setRotation(0, 90, 1, 0, 0);
 	map.setScale(kMapScale, kMapScale, kMapScale);
+
+
 }
 
 void World::update(float frames)
@@ -26,4 +29,9 @@ void World::update(float frames)
 void World::draw()
 {
 	map.drawFaces();
+}
+
+void World::initializeRooms()
+{
+	current_room = &startRoom;
 }

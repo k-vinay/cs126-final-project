@@ -5,18 +5,20 @@ Player::Player()
 	
 }
 
-
 Player::~Player()
 {
 }
+
 
 void Player::setup(World* world)
 {
 	world_ptr = world;
 
-	camera.setGlobalPosition(spawn);
+	camera.setGlobalPosition(kSpawnPt);
+	camera.setOrientation(kSpawnDir);
 	camera.setFov(kFov);
 	ofHideCursor();
+	SetCursorPos(ofGetScreenWidth() / 2, ofGetScreenHeight() / 2);
 }
 
 void Player::update(float frames)
@@ -25,7 +27,7 @@ void Player::update(float frames)
 	{
 		float z_diff = 0.5*kGravity*frames*frames + frames * speed.z;
 		speed.z += frames * kGravity;
-		move({ frames*speed.x,frames*speed.y,z_diff });
+		move({ kJumpSpeedMultiplier*frames*speed.x, kJumpSpeedMultiplier*frames*speed.y, z_diff });
 	}
 	else
 	{
@@ -73,6 +75,7 @@ void Player::update(float frames)
 	is_zoomed = mouse[2];
 }
 
+
 void Player::begin()
 {
 	if (is_zoomed)
@@ -85,6 +88,7 @@ void Player::end()
 	camera.end();
 	camera.setFov(kFov);
 }
+
 
 void Player::move(ofVec3f displacement)
 {
@@ -107,7 +111,12 @@ void Player::move(ofVec3f displacement)
 
 void Player::draw()
 {
+	glm::quat heading = camera.getGlobalOrientation();
+	printf("cam: %3.3f, %3.3f, %3.3f, %3.3f\n", heading.w, heading.x, heading.y, heading.z);
+	ofVec3f pos = camera.getGlobalPosition();
+	printf("%3.3f, %3.3f, %3.3f\n\n", pos.x, pos.y, pos.z);
 }
+
 
 void Player::keyPressed(int key)
 {
@@ -125,6 +134,7 @@ void Player::keyReleased(int key)
 	keyDown[key] = false;
 }
 
+
 void Player::mouseMoved(int x, int y)
 {
 	int x_diff = (ofGetScreenWidth() / 2) - x;
@@ -132,9 +142,6 @@ void Player::mouseMoved(int x, int y)
 
 	camera.rotate(kSensitivity*x_diff, { 0,0,1 });
 	camera.tilt(kSensitivity*y_diff);
-	//ofVec3f heading = player.getOrientationEuler();
-	//std::cout << "camera orientation: " << player.getOrientationEuler() << std::endl;
-	//printf("cam: %3.3f, %3.3f, %3.3f\n", heading.x, heading.y, heading.z);
 
 	SetCursorPos(ofGetScreenWidth() / 2, ofGetScreenHeight() / 2);
 }
@@ -148,6 +155,7 @@ void Player::mouseReleased(int button)
 {
 	mouse[button] = false;
 }
+
 
 ofVec3f Player::getPosition()
 {
