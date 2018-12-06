@@ -79,3 +79,10 @@ bool HitBox::IsHitting(HitBox & other)
 		return false;
 	return true;
 }
+
+bool HitBox::contains(HitBox & other)
+{
+	return ((smallest.x < other.smallest.x) && (largest.x > other.largest.x)
+		&& (smallest.y < other.smallest.y) && (largest.y > other.largest.y)
+		&& (smallest.z < other.smallest.z) && (largest.z > other.largest.z));
+}

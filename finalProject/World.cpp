@@ -18,7 +18,7 @@ void World::setup()
 	map.setRotation(0, 90, 1, 0, 0);
 	map.setScale(kMapScale, kMapScale, kMapScale);
 
-
+	initializeRooms();
 }
 
 void World::update(float frames)
@@ -34,4 +34,6 @@ void World::draw()
 void World::initializeRooms()
 {
 	current_room = &startRoom;
+
+	current_room->addDoor(&door1);
 }

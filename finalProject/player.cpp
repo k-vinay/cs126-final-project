@@ -14,9 +14,14 @@ void Player::setup(World* world)
 {
 	world_ptr = world;
 
+	hitbox = HitBox({ kSpawnPt.x,kSpawnPt.y,kHeight / 2 }, kHitboxDims.x, kHitboxDims.y, kHitboxDims.z);
+	
 	camera.setGlobalPosition(kSpawnPt);
 	camera.setOrientation(kSpawnDir);
 	camera.setFov(kFov);
+	camera.setNearClip(kNearClip);
+	camera.setFarClip(kFarClip);
+
 	ofHideCursor();
 	SetCursorPos(ofGetScreenWidth() / 2, ofGetScreenHeight() / 2);
 }
@@ -56,12 +61,11 @@ void Player::update(float frames)
 			float scale = kMoveSpeed / sqrtf((x_diff*x_diff) + (y_diff*y_diff));
 			x_diff *= scale;
 			y_diff *= scale;
+			move({ frames*speed.x,frames*speed.y,0 });
 		}
 
 		speed.x = x_diff;
 		speed.y = y_diff;
-
-		move({ frames*speed.x,frames*speed.y,0 });
 	}
 
 
@@ -94,11 +98,13 @@ void Player::move(ofVec3f displacement)
 {
 	hitbox.move(displacement.x, 0,0);
 	bool can_move_x = world_ptr->current_room->isValidPosition(hitbox);
-	if (!can_move_x) hitbox.move(-displacement.x, 0, 0);
+	if (!can_move_x)
+		hitbox.move(-displacement.x, 0, 0);
 
 	hitbox.move(0, displacement.y, 0);
 	bool can_move_y = world_ptr->current_room->isValidPosition(hitbox);
-	if (!can_move_x) hitbox.move(0, -displacement.y, 0);
+	if (!can_move_y)
+		hitbox.move(0, -displacement.y, 0);
 
 	if (can_move_x)
 		camera.move({ displacement.x,0,0 });
