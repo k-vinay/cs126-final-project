@@ -59,6 +59,8 @@ void Player::update(float frames)
 		if (!(x_diff == 0 && y_diff == 0))
 		{
 			float scale = kMoveSpeed / sqrtf((x_diff*x_diff) + (y_diff*y_diff));
+			if (is_zoomed)
+				scale *= kAimSpeedMultiplier;
 			x_diff *= scale;
 			y_diff *= scale;
 			move({ frames*speed.x,frames*speed.y,0 });
@@ -82,7 +84,7 @@ void Player::update(float frames)
 
 void Player::begin()
 {
-	if (is_zoomed)
+	if (is_zoomed && !is_jumping)
 		camera.setFov(kZoomFov);
 	camera.begin();
 }

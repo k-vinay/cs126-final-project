@@ -40,6 +40,23 @@ bool Room::isValidPosition(HitBox player)
 	return true;
 }
 
+int Room::getState(HitBox player)
+{
+	if (!isValidPosition(player))
+		return -1;
+	for (HitBox pit : pits)
+	{
+		if (pit.contains(player))
+			return 1;
+	}
+	for (Door* door : doors)
+	{
+		if (player.IsHitting(door->doorway))
+			return 2;
+	}
+	return 0;
+}
+
 ofVec2f Room::get_small_corner()
 {
 	return ofVec2f();

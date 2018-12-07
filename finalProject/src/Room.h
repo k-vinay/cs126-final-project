@@ -42,6 +42,7 @@ public:
 	void update(float frames);
 
 	bool isValidPosition(HitBox player);
+	int getState(HitBox player);
 
 	ofVec2f get_small_corner();
 	ofVec2f get_big_corner();
