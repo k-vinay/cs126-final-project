@@ -19,8 +19,10 @@ class Player
 
 	bool is_zoomed;
 	bool is_jumping;
+	bool pitfall;
 	
 	ofVec3f speed;
+	ofVec3f last_ground;
 public:
 
 	ofCamera camera;
@@ -35,6 +37,7 @@ public:
 	void end();
 
 	void move(ofVec3f displacement);
+	void setPosition(ofVec3f pos);
 
 	void draw();
 

@@ -24,4 +24,6 @@ public:
 	bool intersects(ofVec3f point);
 	bool IsHitting(HitBox &other);
 	bool contains(HitBox &other);
+
+	ofVec3f get_position();
 };

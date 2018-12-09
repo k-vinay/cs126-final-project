@@ -14,9 +14,8 @@ void Player::setup(World* world)
 {
 	world_ptr = world;
 
-	hitbox = HitBox({ kSpawnPt.x,kSpawnPt.y,kHeight / 2 }, kHitboxDims.x, kHitboxDims.y, kHitboxDims.z);
-	
-	camera.setGlobalPosition(kSpawnPt);
+	setPosition(kSpawnPt);
+
 	camera.setOrientation(kSpawnDir);
 	camera.setFov(kFov);
 	camera.setNearClip(kNearClip);
@@ -24,15 +23,44 @@ void Player::setup(World* world)
 
 	ofHideCursor();
 	SetCursorPos(ofGetScreenWidth() / 2, ofGetScreenHeight() / 2);
+
+	is_jumping = false;
+	pitfall = false;
 }
 
 void Player::update(float frames)
 {
+	is_zoomed = mouse[2];
+
 	if (is_jumping)
 	{
 		float z_diff = 0.5*kGravity*frames*frames + frames * speed.z;
 		speed.z += frames * kGravity;
 		move({ kJumpSpeedMultiplier*frames*speed.x, kJumpSpeedMultiplier*frames*speed.y, z_diff });
+		
+		if (camera.getGlobalPosition().z < kCamDip + kHeight)
+		{
+			is_jumping = false;
+			setPosition({ getPosition().x,getPosition().y,kSpawnPt.z });
+			speed.z = 0;
+		}
+
+		is_zoomed = false;
+	}
+	else if (pitfall)
+	{
+		float z_diff = 0.5*kGravity*frames*frames + frames * speed.z;
+		speed.z += frames * kGravity;
+		move({ 0,0, z_diff });
+
+		if (camera.getGlobalPosition().z < kPitDepth+kHeight+kCamDip)
+		{
+			pitfall = false;
+			setPosition(last_ground);
+			speed.z = 0;
+		}
+
+		is_zoomed = false;
 	}
 	else
 	{
@@ -68,17 +96,19 @@ void Player::update(float frames)
 
 		speed.x = x_diff;
 		speed.y = y_diff;
+
+		last_ground = getPosition();
 	}
 
-
-	if (camera.getGlobalPosition().z < kHeight)
+	int state = world_ptr->current_room->getState(hitbox);
+	if (state == 1) //door
 	{
-		is_jumping = false;
-		move({ 0,0,kHeight - camera.getGlobalPosition().z });
-		speed.z = 0;
+		world_ptr->current_room = world_ptr->current_room->isInDoor(hitbox)->useDoor(world_ptr->current_room, hitbox);
 	}
-
-	is_zoomed = mouse[2];
+	else if (state == -1) //pit
+	{
+		pitfall = true;
+	}
 }
 
 
@@ -117,11 +147,18 @@ void Player::move(ofVec3f displacement)
 	camera.move({ 0,0,displacement.z });
 }
 
+void Player::setPosition(ofVec3f pos)
+{
+	hitbox.redefine(pos, kHitboxDims.x, kHitboxDims.y, kHitboxDims.z);
+	camera.setGlobalPosition(pos);
+	camera.move({ 0, 0, kCamDip + kHeight/2 });
+}
+
 void Player::draw()
 {
 	glm::quat heading = camera.getGlobalOrientation();
 	printf("cam: %3.3f, %3.3f, %3.3f, %3.3f\n", heading.w, heading.x, heading.y, heading.z);
-	ofVec3f pos = camera.getGlobalPosition();
+	ofVec3f pos = getPosition();
 	printf("%3.3f, %3.3f, %3.3f\n\n", pos.x, pos.y, pos.z);
 }
 
@@ -134,6 +171,11 @@ void Player::keyPressed(int key)
 	{
 		is_jumping = true;
 		speed.z = kJumpPower;
+	}
+
+	if (key == OF_KEY_BACKSPACE)
+	{
+		return keyReleased(OF_KEY_BACKSPACE);
 	}
 }
 
@@ -167,5 +209,5 @@ void Player::mouseReleased(int button)
 
 ofVec3f Player::getPosition()
 {
-	return camera.getPosition();
+	return hitbox.get_position();
 }

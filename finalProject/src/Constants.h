@@ -1,7 +1,6 @@
 #pragma once
 #include "ofMain.h"
 
-
 const float kGunScale = 0.05;
 
 const float kDefaultFramerate = 60.0;
@@ -18,7 +17,9 @@ const float kSensitivity = 0.1;
 const float kZoom = -20;
 
 const float kHeight = 15;
-const ofVec3f kSpawnPt = { -420,-420,kHeight - 1 };
+const float kCamDip = -1;
+const float kPitDepth = -30;
+const ofVec3f kSpawnPt = { -420, -420, kHeight/2 + 0.1 };
 const ofVec3f kHitboxDims = { kHeight/2, kHeight/2, kHeight };
 const glm::quat kSpawnDir = { 0.654, 0.654, -0.26, -0.26 };
 

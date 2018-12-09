@@ -33,7 +33,7 @@ void World::draw()
 
 void World::initializeRooms()
 {
-	current_room = &startRoom;
+	startRoom.addDoor(&door1);
 
-	current_room->addDoor(&door1);
+	current_room = &startRoom;
 }

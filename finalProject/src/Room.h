@@ -10,14 +10,17 @@ class Door
 {
 public:
 	HitBox doorway;
-	Room* next;
+	Room* room1;
+	Room* room2;
 
-	Door(ofVec3f small, ofVec3f big, Room* nextRoom)
+	Door(ofVec3f small, ofVec3f big, Room* firstRoom, Room* secondRoom)
 		:doorway(small, big)
 	{
-		next = nextRoom;
+		room1 = firstRoom;
+		room2 = secondRoom;
 	}
 
+	Room* useDoor(Room* current_room, HitBox player);
 };
 
 class Room
@@ -43,9 +46,12 @@ public:
 
 	bool isValidPosition(HitBox player);
 	int getState(HitBox player);
+	Door* isInDoor(HitBox player);
 
 	ofVec2f get_small_corner();
 	ofVec2f get_big_corner();
 	std::vector<ofVec2f> get_doors();
+
+	HitBox get_box();
 };
 

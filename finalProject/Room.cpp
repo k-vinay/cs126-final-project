@@ -30,7 +30,7 @@ void Room::update(float frames)
 
 bool Room::isValidPosition(HitBox player)
 {
-	if (!room.contains(player))
+	if (!room.contains(player) && !isInDoor(player))
 		return false;
 	for (HitBox wall : walls)
 	{
@@ -42,19 +42,24 @@ bool Room::isValidPosition(HitBox player)
 
 int Room::getState(HitBox player)
 {
-	if (!isValidPosition(player))
-		return -1;
+	if (isInDoor(player))
+		return 1;
 	for (HitBox pit : pits)
 	{
 		if (pit.contains(player))
-			return 1;
+			return -1;
 	}
+	return 0;
+}
+
+Door* Room::isInDoor(HitBox player)
+{
 	for (Door* door : doors)
 	{
 		if (player.IsHitting(door->doorway))
-			return 2;
+			return door;
 	}
-	return 0;
+	return nullptr;
 }
 
 ofVec2f Room::get_small_corner()
@@ -70,4 +75,21 @@ ofVec2f Room::get_big_corner()
 std::vector<ofVec2f> Room::get_doors()
 {
 	return std::vector<ofVec2f>();
+}
+
+HitBox Room::get_box()
+{
+	return room;
+}
+
+Room * Door::useDoor(Room * current_room, HitBox player)
+{
+	if (player.IsHitting(current_room->get_box()))
+		return current_room;
+
+	if (current_room == room1)
+		return room2;
+	if (current_room == room2)
+		return room1;
+	return nullptr;
 }

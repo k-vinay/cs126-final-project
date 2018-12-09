@@ -86,3 +86,8 @@ bool HitBox::contains(HitBox & other)
 		&& (smallest.y < other.smallest.y) && (largest.y > other.largest.y)
 		&& (smallest.z < other.smallest.z) && (largest.z > other.largest.z));
 }
+
+ofVec3f HitBox::get_position()
+{
+	return center;
+}
