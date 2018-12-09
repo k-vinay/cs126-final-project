@@ -13,7 +13,7 @@ const float kZoomFov = 60;
 const float kNearClip = 0.1;
 const float kFarClip = 1000;
 const float kMoveSpeed = 1.3;
-const float kSensitivity = 0.1;
+const float kSensitivity = 0.15;
 const float kZoom = -20;
 
 const float kMaxTilt = 88;
@@ -29,3 +29,5 @@ const float kAimSpeedMultiplier = 0.6;
 const float kJumpSpeedMultiplier = 2.0;
 const float kJumpPower = 2;
 const float kGravity = -0.2;
+
+const float kWallHeight = 20 * kHeight;

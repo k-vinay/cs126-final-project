@@ -12,7 +12,7 @@ Room::Room(ofVec2f small, ofVec2f big, std::vector<Enemy> enemyList, std::vector
 	enemy_positions = enemySpawnList;
 	walls = wallList;
 	pits = pitList;
-	room = HitBox(small.x, small.y, 0, big.x, big.y, kHeight*20);
+	room = HitBox(small.x, small.y, 0, big.x, big.y, kWallHeight);
 }
 
 Room::~Room()

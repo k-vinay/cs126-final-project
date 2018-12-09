@@ -7,6 +7,7 @@ void ofApp::setup()
 	world.setup();
 	ofEnableLighting();
 	camera.setNearClip(0.01);
+	camera.rotate(-90, { 0,0,1 });
 }
 
 //--------------------------------------------------------------
@@ -14,18 +15,21 @@ void ofApp::update()
 {
 	if (free_roam)
 	{
+		float speed = kMoveSpeed;
+		if (keyDown['m'])
+			speed /= 20.0;
 		if (keyDown['w'])
-			camera.dolly(-kMoveSpeed);
+			camera.move({ speed,0,0 });
 		if (keyDown['s'])
-			camera.dolly(kMoveSpeed);
+			camera.move({ -speed,0,0 });
 		if (keyDown['a'])
-			camera.truck(-kMoveSpeed);
+			camera.move({ 0,speed,0 });
 		if (keyDown['d'])
-			camera.truck(kMoveSpeed);
+			camera.move({ 0,-speed,0 });
 		if (keyDown[' '])
-			camera.move({ 0,0,kMoveSpeed });
+			camera.move({ 0,0,speed });
 		if (keyDown['c'])
-			camera.move({ 0,0,-kMoveSpeed });
+			camera.move({ 0,0,-speed });
 		return;
 	}
 
@@ -72,6 +76,10 @@ void ofApp::keyPressed(int key)
 	{
 		free_roam = !free_roam;
 		camera.setGlobalPosition(player.getPosition());
+		if (free_roam)
+			ofShowCursor();
+		else
+			ofHideCursor();
 	}
 	if (!free_roam)
 		player.keyPressed(key);
@@ -94,8 +102,8 @@ void ofApp::mouseMoved(int x, int y )
 	int x_diff = (ofGetScreenWidth() / 2) - x;
 	int y_diff = (ofGetScreenHeight() / 2) - y;
 
-	camera.rotate(kSensitivity*x_diff, { 0,0,1 });
-	camera.tilt(kSensitivity*y_diff);
+	//camera.rotate(kSensitivity*x_diff, { 0,0,1 });
+	//camera.tilt(kSensitivity*y_diff);
 
 	SetCursorPos(ofGetScreenWidth() / 2, ofGetScreenHeight() / 2);
 }
@@ -105,16 +113,7 @@ void ofApp::mouseDragged(int x, int y, int button)
 {
 	if (free_roam)
 		return;
-	player.mousePressed(button);
-	player.mouseMoved(x, y);
-
-	int x_diff = (ofGetScreenWidth() / 2) - x;
-	int y_diff = (ofGetScreenHeight() / 2) - y;
-
-	camera.rotate(kSensitivity*x_diff, { 0,0,1 });
-	camera.tilt(kSensitivity*y_diff);
-
-	SetCursorPos(ofGetScreenWidth() / 2, ofGetScreenHeight() / 2);
+	mouseMoved(x, y);
 }
 
 //--------------------------------------------------------------
