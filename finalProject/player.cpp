@@ -125,6 +125,14 @@ void Player::end()
 	camera.setFov(kFov);
 }
 
+void Player::draw()
+{
+	glm::quat heading = camera.getGlobalOrientation();
+	printf("cam: %3.3f, %3.3f, %3.3f, %3.3f\n", heading.w, heading.x, heading.y, heading.z);
+	ofVec3f pos = getPosition();
+	printf("%3.3f, %3.3f, %3.3f\n\n", pos.x, pos.y, pos.z);
+}
+
 
 void Player::move(ofVec3f displacement)
 {
@@ -152,14 +160,6 @@ void Player::setPosition(ofVec3f pos)
 	hitbox.redefine(pos, kHitboxDims.x, kHitboxDims.y, kHitboxDims.z);
 	camera.setGlobalPosition(pos);
 	camera.move({ 0, 0, kCamDip + kHeight/2 });
-}
-
-void Player::draw()
-{
-	glm::quat heading = camera.getGlobalOrientation();
-	printf("cam: %3.3f, %3.3f, %3.3f, %3.3f\n", heading.w, heading.x, heading.y, heading.z);
-	ofVec3f pos = getPosition();
-	printf("%3.3f, %3.3f, %3.3f\n\n", pos.x, pos.y, pos.z);
 }
 
 

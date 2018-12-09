@@ -35,11 +35,10 @@ public:
 
 	void begin();
 	void end();
+	void draw();
 
 	void move(ofVec3f displacement);
 	void setPosition(ofVec3f pos);
-
-	void draw();
 
 	void keyPressed(int key);
 	void keyReleased(int key);

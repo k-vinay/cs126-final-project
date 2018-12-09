@@ -10,6 +10,10 @@ class ofApp : public ofBaseApp{
 	Player player;
 	World world;
 	ofLight light;
+	ofCamera camera;
+
+	bool free_roam = false;
+	bool keyDown[255];
 
 	public:
 		void setup();
