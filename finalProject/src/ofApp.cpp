@@ -6,6 +6,7 @@ void ofApp::setup()
 	player.setup(&world);
 	world.setup();
 	ofEnableLighting();
+	camera.setNearClip(0.01);
 }
 
 //--------------------------------------------------------------

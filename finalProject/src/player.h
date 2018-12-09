@@ -23,6 +23,8 @@ class Player
 	
 	ofVec3f speed;
 	ofVec3f last_ground;
+
+	float cam_tilt;
 public:
 
 	ofCamera camera;

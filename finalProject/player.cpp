@@ -20,6 +20,7 @@ void Player::setup(World* world)
 	camera.setFov(kFov);
 	camera.setNearClip(kNearClip);
 	camera.setFarClip(kFarClip);
+	cam_tilt = 0;
 
 	ofHideCursor();
 	SetCursorPos(ofGetScreenWidth() / 2, ofGetScreenHeight() / 2);
@@ -190,9 +191,15 @@ void Player::mouseMoved(int x, int y)
 	int x_diff = (ofGetScreenWidth() / 2) - x;
 	int y_diff = (ofGetScreenHeight() / 2) - y;
 
-	camera.rotate(kSensitivity*x_diff, { 0,0,1 });
-	camera.tilt(kSensitivity*y_diff);
+	x_diff *= kSensitivity;
+	y_diff *= kSensitivity;
 
+	if (abs(cam_tilt + y_diff) < kMaxTilt)
+	{
+		camera.rotate(x_diff, { 0,0,1 });
+		camera.tilt(y_diff);
+		cam_tilt += y_diff;
+	}
 	SetCursorPos(ofGetScreenWidth() / 2, ofGetScreenHeight() / 2);
 }
 

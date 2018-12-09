@@ -13,12 +13,8 @@ public:
 	Room* room1;
 	Room* room2;
 
-	Door(ofVec3f small, ofVec3f big, Room* firstRoom, Room* secondRoom)
-		:doorway(small, big)
-	{
-		room1 = firstRoom;
-		room2 = secondRoom;
-	}
+	Door(ofVec3f small, ofVec3f big, Room* firstRoom, Room* secondRoom);
+	
 
 	Room* useDoor(Room* current_room, HitBox player);
 };

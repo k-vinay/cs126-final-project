@@ -18,7 +18,7 @@ void World::setup()
 	map.setRotation(0, 90, 1, 0, 0);
 	map.setScale(kMapScale, kMapScale, kMapScale);
 
-	initializeRooms();
+	current_room = &startRoom;
 }
 
 void World::update(float frames)
@@ -29,11 +29,4 @@ void World::update(float frames)
 void World::draw()
 {
 	map.drawFaces();
-}
-
-void World::initializeRooms()
-{
-	startRoom.addDoor(&door1);
-
-	current_room = &startRoom;
 }

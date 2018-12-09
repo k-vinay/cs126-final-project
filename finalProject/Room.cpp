@@ -82,6 +82,16 @@ HitBox Room::get_box()
 	return room;
 }
 
+Door::Door(ofVec3f small, ofVec3f big, Room * firstRoom, Room * secondRoom)
+	:doorway(small, big)
+{
+	room1 = firstRoom;
+	room2 = secondRoom;
+
+	room1->addDoor(this);
+	room2->addDoor(this);
+}
+
 Room * Door::useDoor(Room * current_room, HitBox player)
 {
 	if (player.IsHitting(current_room->get_box()))

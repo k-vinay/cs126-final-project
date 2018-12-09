@@ -16,6 +16,8 @@ const float kMoveSpeed = 1.3;
 const float kSensitivity = 0.1;
 const float kZoom = -20;
 
+const float kMaxTilt = 88;
+
 const float kHeight = 15;
 const float kCamDip = -1;
 const float kPitDepth = -30;
