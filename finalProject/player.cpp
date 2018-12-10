@@ -65,6 +65,7 @@ void Player::update(float frames)
 	}
 	else
 	{
+		last_ground = getPosition();
 		ofVec3f player_pos = camera.getGlobalPosition();
 		float x = player_pos.x;
 		float y = player_pos.y;
@@ -97,8 +98,6 @@ void Player::update(float frames)
 
 		speed.x = x_diff;
 		speed.y = y_diff;
-
-		last_ground = getPosition();
 	}
 
 	int state = world_ptr->current_room->getState(hitbox);
@@ -109,6 +108,7 @@ void Player::update(float frames)
 	else if (state == -1) //pit
 	{
 		pitfall = true;
+		cout << "pit\n";
 	}
 }
 

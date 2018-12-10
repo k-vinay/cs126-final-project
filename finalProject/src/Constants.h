@@ -20,7 +20,6 @@ const float kMaxTilt = 88;
 
 const float kHeight = 15;
 const float kCamDip = -1;
-const float kPitDepth = -30;
 const ofVec3f kSpawnPt = { -420, -420, kHeight/2 + 0.1 };
 const ofVec3f kHitboxDims = { kHeight/2, kHeight/2, kHeight };
 const glm::quat kSpawnDir = { 0.654, 0.654, -0.26, -0.26 };
@@ -31,3 +30,5 @@ const float kJumpPower = 2;
 const float kGravity = -0.2;
 
 const float kWallHeight = 20 * kHeight;
+const float kPitBoxHeight = kHeight + 2.5;
+const float kPitDepth = -120;

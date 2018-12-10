@@ -18,7 +18,7 @@ Room hallway2({ -308,-184 }, { -184,-160 }, {}, {}, {}, {});
 Door door3({ -308 - kHitboxDims.x, -184 + kHitboxDims.y, 0 }, { -308 + kHitboxDims.x, -160 - kHitboxDims.y, 2 * kHeight }, &room1, &hallway2);
 Door door4({ -184 - kHitboxDims.x, -184 + kHitboxDims.y, 0 }, { -184 + kHitboxDims.x, -160 - kHitboxDims.y, 2 * kHeight }, &hallway2, &room2);
 
-Room room3({ -357,-480 }, { -85,-307 }, {}, {}, {}, {});
+Room room3({ -357,-480 }, { -85,-307 }, {}, {}, {}, { HitBox({ -283,-480,0 },{ -258,-307,kPitBoxHeight }), HitBox({ -184,-480,0 },{ -160,-307,kPitBoxHeight }) });
 Room hallway3({ -110,-307 }, { -85,-234 }, {}, {}, {}, {});
 Door door5({ -110 + kHitboxDims.x, -234 - kHitboxDims.y, 0 }, { -85 - kHitboxDims.x, -234 + kHitboxDims.y, 2 * kHeight }, &room2, &hallway3);
 Door door6({ -110 + kHitboxDims.x, -307 - kHitboxDims.y, 0 }, { -85 - kHitboxDims.x, -307 + kHitboxDims.y, 2 * kHeight }, &hallway3, &room3);
