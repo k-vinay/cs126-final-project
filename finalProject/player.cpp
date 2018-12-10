@@ -44,6 +44,13 @@ void Player::update(float frames)
 			is_jumping = false;
 			setPosition({ getPosition().x,getPosition().y,kSpawnPt.z });
 			speed.z = 0;
+			if (world_ptr->current_room->getState(hitbox) != -1)
+			{
+				last_ground = getPosition();
+				pitfall = false;
+			}
+			else
+				pitfall = true;
 		}
 
 		is_zoomed = false;
@@ -62,7 +69,7 @@ void Player::update(float frames)
 		}
 
 		is_zoomed = false;
-	}
+	}	
 	else
 	{
 		last_ground = getPosition();
@@ -167,8 +174,8 @@ void Player::setPosition(ofVec3f pos)
 void Player::keyPressed(int key)
 {
 	keyDown[key] = true;
-
-	if (keyDown[' '] && speed.length()!=0 && !is_jumping)
+	bool canJump = (speed.length() != 0) && !is_jumping && !pitfall && !(world_ptr->current_room->getState(hitbox) == -1);
+	if (keyDown[' '] && canJump)
 	{
 		is_jumping = true;
 		speed.z = kJumpPower;
