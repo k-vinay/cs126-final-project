@@ -1,12 +1,14 @@
 #pragma once
 #include "ofMain.h"
 
-const float kGunScale = 0.05;
+const int kStartHealth = 6;
 
 const float kDefaultFramerate = 60.0;
+const float iframes = 60;
 
 const float kGundeadScale = 0.03;
 const float kMapScale = 1;
+const float kGunScale = 0.05;
 
 const float kFov = 90;
 const float kZoomFov = 60;
@@ -32,3 +34,27 @@ const float kGravity = -0.2;
 const float kWallHeight = 20 * kHeight;
 const float kPitBoxHeight = kHeight + 2.5;
 const float kPitDepth = -120;
+
+struct EnemyData
+{
+	std::string filename;
+	int health;
+	Gun gun;
+	ofVec3f hitbox_dims;
+};
+
+const int kEnemyTypes = 2;
+const EnemyData kEnemyData[kEnemyTypes] = {
+		{
+			"bullet-kin.dae",
+			3,
+			Gun(),
+			{ kHeight/2,kHeight/2,kHeight }
+		},
+		{
+			"shotgun-kin.dae",
+			6,
+			Gun(),
+			{ kHeight/2,kHeight/2,kHeight*1.5 }
+		}
+};

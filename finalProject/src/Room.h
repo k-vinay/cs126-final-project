@@ -33,12 +33,14 @@ class Room
 
 public:
 	Room();
-	Room(ofVec2f small, ofVec2f big, std::vector<Enemy> enemyList, std::vector<ofVec2f> enemySpawnList, std::vector<HitBox> walls, std::vector<HitBox> pits);
+	Room(ofVec2f small, ofVec2f big, std::vector<Enemy> enemyList, std::vector<HitBox> walls, std::vector<HitBox> pits);
 	~Room();
 
 	void addDoor(Door* door);
 
-	void update(float frames);
+	//void update(float frames, HitBox* player);
+
+	void draw();
 
 	bool isValidPosition(HitBox player);
 	int getState(HitBox player);
@@ -47,7 +49,7 @@ public:
 	ofVec2f get_small_corner();
 	ofVec2f get_big_corner();
 	std::vector<ofVec2f> get_doors();
-
+	std::vector<Enemy> get_enemies();
 	HitBox get_box();
 };
 

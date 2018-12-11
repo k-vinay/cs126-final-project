@@ -27,6 +27,8 @@ void Player::setup(World* world)
 
 	is_jumping = false;
 	pitfall = false;
+
+	world_ptr->player_hitbox = &hitbox;
 }
 
 void Player::update(float frames)

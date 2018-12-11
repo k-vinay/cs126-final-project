@@ -4,12 +4,11 @@ Room::Room()
 {
 }
 
-Room::Room(ofVec2f small, ofVec2f big, std::vector<Enemy> enemyList, std::vector<ofVec2f> enemySpawnList, std::vector<HitBox> wallList, std::vector<HitBox> pitList)
+Room::Room(ofVec2f small, ofVec2f big, std::vector<Enemy> enemyList, std::vector<HitBox> wallList, std::vector<HitBox> pitList)
 {
 	small_corner = small;
 	big_corner = big;
 	enemies = enemyList;
-	enemy_positions = enemySpawnList;
 	walls = wallList;
 	pits = pitList;
 	room = HitBox(small.x, small.y, 0, big.x, big.y, kWallHeight);
@@ -24,8 +23,16 @@ void Room::addDoor(Door* door)
 	doors.push_back(door);
 }
 
-void Room::update(float frames)
+//void Room::update(float frames, HitBox* player)
+//{
+//	for (Enemy enemy : enemies)
+//		enemy.update(frames, player->get_position());
+//}
+
+void Room::draw()
 {
+	//for (Enemy enemy : enemies)
+		//enemy.draw();
 }
 
 bool Room::isValidPosition(HitBox player)
@@ -75,6 +82,11 @@ ofVec2f Room::get_big_corner()
 std::vector<ofVec2f> Room::get_doors()
 {
 	return std::vector<ofVec2f>();
+}
+
+std::vector<Enemy> Room::get_enemies()
+{
+	return enemies;
 }
 
 HitBox Room::get_box()
