@@ -123,11 +123,7 @@ void Player::update(float frames)
 		speed.y = y_diff;
 	}
 
-	if (health == 0)
-	{
-		//end the game
-		ofExit();
-	}
+	
 
 	int state = world_ptr->current_room->getState(hitbox);
 	if (state == 1) //door
@@ -138,6 +134,12 @@ void Player::update(float frames)
 	{
 		pitfall = true;
 		cout << "pit\n";
+	}
+
+	if (health <= 0)
+	{
+		//end the game
+		ofExit();
 	}
 }
 
