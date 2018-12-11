@@ -12,6 +12,7 @@ Room::Room(ofVec2f small, ofVec2f big, std::vector<Enemy> enemyList, std::vector
 	walls = wallList;
 	pits = pitList;
 	room = HitBox(small.x, small.y, 0, big.x, big.y, kWallHeight);
+	is_cleared = false;
 }
 
 Room::~Room()
@@ -23,11 +24,10 @@ void Room::addDoor(Door* door)
 	doors.push_back(door);
 }
 
-//void Room::update(float frames, HitBox* player)
-//{
-//	for (Enemy enemy : enemies)
-//		enemy.update(frames, player->get_position());
-//}
+void Room::update(float frames, bool cleared)
+{
+	is_cleared = cleared;
+}
 
 void Room::draw()
 {
@@ -37,7 +37,7 @@ void Room::draw()
 
 bool Room::isValidPosition(HitBox player)
 {
-	if (!room.contains(player) && !isInDoor(player))
+	if (!room.contains(player) && !(isInDoor(player) && is_cleared))
 		return false;
 	for (HitBox wall : walls)
 	{

@@ -8,14 +8,19 @@
 
 class Player
 {
+	ofImage health_bar[7];
+
 	World* world_ptr;
 
 	HitBox hitbox;
 	int health;
-	std::vector<Gun> guns;
+	Gun gun;
 
 	bool keyDown[255];
 	bool mouse[3];
+
+	ofImage normal_hud;
+	ofImage zoomed_hud;
 
 	bool is_zoomed;
 	bool is_jumping;

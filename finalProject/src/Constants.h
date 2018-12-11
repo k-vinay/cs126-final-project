@@ -1,7 +1,7 @@
 #pragma once
 #include "ofMain.h"
 
-const int kStartHealth = 6;
+const int kStartHealth = 6; //do not go above 6
 
 const float kDefaultFramerate = 60.0;
 const float iframes = 60;
@@ -16,7 +16,7 @@ const float kNearClip = 0.1;
 const float kFarClip = 1000;
 const float kMoveSpeed = 1.3;
 const float kSensitivity = 0.15;
-const float kZoom = -20;
+const float kZoomedMultiplier = 0.6;
 
 const float kMaxTilt = 88;
 

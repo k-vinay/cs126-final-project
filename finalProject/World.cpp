@@ -18,6 +18,11 @@ void World::setup()
 	map.setRotation(0, 90, 1, 0, 0);
 	map.setScale(kMapScale, kMapScale, kMapScale);
 
+	doors.loadModel("map-with-doors.dae");
+	doors.setPosition(0, 0, 0);
+	doors.setRotation(0, 90, 1, 0, 0);
+	doors.setScale(kMapScale, kMapScale, kMapScale);
+
 	current_room = &startRoom;
 }
 
@@ -25,10 +30,16 @@ void World::update(float frames)
 {
 	if (loaded_room != current_room)
 		loadRoom();
+
+	enemies_alive = loaded_enemies.size();
 	for (int i = 0; i < loaded_enemies.size(); i++)
 	{
 		loaded_enemies[i].update(frames, player_hitbox->get_position(), loaded_enemy_models[i]);
+		if (loaded_enemies[i].get_health() <= 0)
+			enemies_alive--;
 	}
+	room_is_cleared = (enemies_alive == 0);
+	current_room->update(frames, room_is_cleared);
 }
 
 void World::loadRoom()
@@ -56,7 +67,12 @@ void World::loadRoom()
 
 void World::draw()
 {
-	map.drawFaces();
+
+	if (!room_is_cleared)
+		doors.drawFaces();
+	else
+		map.drawFaces();
+
 	current_room->draw();
 
 	ofLight enemy_light;
@@ -68,4 +84,5 @@ void World::draw()
 		model.drawFaces();
 	}
 	enemy_light.disable();
+
 }

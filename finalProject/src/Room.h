@@ -31,6 +31,8 @@ class Room
 	std::vector<HitBox> walls;
 	std::vector<HitBox> pits;
 
+	bool is_cleared;
+
 public:
 	Room();
 	Room(ofVec2f small, ofVec2f big, std::vector<Enemy> enemyList, std::vector<HitBox> walls, std::vector<HitBox> pits);
@@ -38,7 +40,7 @@ public:
 
 	void addDoor(Door* door);
 
-	//void update(float frames, HitBox* player);
+	void update(float frames, bool cleared);
 
 	void draw();
 

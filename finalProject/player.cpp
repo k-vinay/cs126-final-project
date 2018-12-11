@@ -14,6 +14,8 @@ void Player::setup(World* world)
 {
 	world_ptr = world;
 
+	health = kStartHealth;
+
 	setPosition(kSpawnPt);
 
 	camera.setOrientation(kSpawnDir);
@@ -29,6 +31,17 @@ void Player::setup(World* world)
 	pitfall = false;
 
 	world_ptr->player_hitbox = &hitbox;
+
+	normal_hud.loadImage("hud.png");
+	zoomed_hud.loadImage("hud-zoomed.png");
+
+	health_bar[0].loadImage("healthbar/0.png");
+	health_bar[1].loadImage("healthbar/1.png");
+	health_bar[2].loadImage("healthbar/2.png");
+	health_bar[3].loadImage("healthbar/3.png");
+	health_bar[4].loadImage("healthbar/4.png");
+	health_bar[5].loadImage("healthbar/5.png");
+	health_bar[6].loadImage("healthbar/6.png");
 }
 
 void Player::update(float frames)
@@ -68,6 +81,7 @@ void Player::update(float frames)
 			pitfall = false;
 			setPosition(last_ground);
 			speed.z = 0;
+			health--;
 		}
 
 		is_zoomed = false;
@@ -109,6 +123,12 @@ void Player::update(float frames)
 		speed.y = y_diff;
 	}
 
+	if (health == 0)
+	{
+		//end the game
+		ofExit();
+	}
+
 	int state = world_ptr->current_room->getState(hitbox);
 	if (state == 1) //door
 	{
@@ -124,8 +144,14 @@ void Player::update(float frames)
 
 void Player::begin()
 {
-	if (is_zoomed && !is_jumping)
+	if (is_zoomed)
+	{
 		camera.setFov(kZoomFov);
+	}
+	else
+	{
+		camera.setFov(kFov);
+	}
 	camera.begin();
 }
 
@@ -133,6 +159,12 @@ void Player::end()
 {
 	camera.end();
 	camera.setFov(kFov);
+	
+	health_bar[health].draw(0, 0);
+	if (is_zoomed)
+		zoomed_hud.draw(0, 0);
+	else
+		normal_hud.draw(0, 0);
 }
 
 void Player::draw()
@@ -202,6 +234,12 @@ void Player::mouseMoved(int x, int y)
 
 	x_diff *= kSensitivity;
 	y_diff *= kSensitivity;
+	
+	if (is_zoomed)
+	{
+		x_diff *= kZoomedMultiplier;
+		y_diff *= kZoomedMultiplier;
+	}
 
 	if (abs(cam_tilt + y_diff) < kMaxTilt)
 	{
