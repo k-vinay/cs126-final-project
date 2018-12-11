@@ -7,3 +7,8 @@ commits up to 12/4/18:
   
 commits up to 12/6/18:
   worked on collision detection for rooms
+
+commits up to 12/9/18:
+  finished collision detection for rooms,
+  mapped out room coordinates, added them to the program,
+  completed map so you can now explore everywhere properly
