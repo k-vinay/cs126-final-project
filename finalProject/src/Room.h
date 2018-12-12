@@ -15,8 +15,21 @@ public:
 
 	Door(ofVec3f small, ofVec3f big, Room* firstRoom, Room* secondRoom);
 	
-
 	Room* useDoor(Room* current_room, HitBox player);
+};
+
+struct Bullet
+{
+	HitBox hitbox;
+	ofVec3f velocity;
+	bool is_active;
+
+	Bullet(HitBox box, ofVec3f vel)
+	{
+		hitbox = box;
+		velocity = vel;
+		is_active = true;
+	}
 };
 
 class Room
@@ -31,6 +44,9 @@ class Room
 	std::vector<HitBox> walls;
 	std::vector<HitBox> pits;
 
+	std::vector<Bullet> bullets;
+	std::vector<Bullet> enemy_bullets;
+
 	bool is_cleared;
 
 public:
@@ -38,7 +54,11 @@ public:
 	Room(ofVec2f small, ofVec2f big, std::vector<Enemy> enemyList, std::vector<HitBox> walls, std::vector<HitBox> pits);
 	~Room();
 
+	void unload();
+
 	void addDoor(Door* door);
+
+	void addBullet(Bullet bullet);
 
 	void update(float frames, bool cleared);
 
@@ -50,6 +70,7 @@ public:
 
 	ofVec2f get_small_corner();
 	ofVec2f get_big_corner();
+	std::vector<Bullet> get_bullets();
 	std::vector<ofVec2f> get_doors();
 	std::vector<Enemy> get_enemies();
 	HitBox get_box();

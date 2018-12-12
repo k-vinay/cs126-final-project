@@ -48,6 +48,9 @@ void Player::update(float frames)
 {
 	is_zoomed = mouse[2];
 
+	frames_since_last_shot += frames;
+	can_shoot = frames_since_last_shot > shoot_delay_frames;
+
 	if (is_jumping)
 	{
 		float z_diff = 0.5*kGravity*frames*frames + frames * speed.z;
@@ -107,6 +110,21 @@ void Player::update(float frames)
 		float y_diff = camera.getGlobalPosition().y - y;
 		float z_diff = camera.getGlobalPosition().z - z;
 
+		if (mouse[0] && can_shoot)
+		{
+			ofVec3f pos = camera.getGlobalPosition();
+			camera.dolly(-kBulletSpeed);
+			float bullet_x = camera.getGlobalPosition().x - pos.x;
+			float bullet_y = camera.getGlobalPosition().y - pos.y;
+			float bullet_z = camera.getGlobalPosition().z - pos.z;
+
+			world_ptr->current_room->addBullet(Bullet(HitBox({ camera.getGlobalPosition(),kBulletBoxSize,kBulletBoxSize,kBulletBoxSize }), { bullet_x,bullet_y,bullet_z }));
+
+			can_shoot = false;
+			frames_since_last_shot = 0;
+
+		}
+
 		camera.setPosition(player_pos);
 
 		if (!(x_diff == 0 && y_diff == 0))
@@ -121,6 +139,9 @@ void Player::update(float frames)
 
 		speed.x = x_diff;
 		speed.y = y_diff;
+
+		
+
 	}
 
 	
@@ -134,6 +155,10 @@ void Player::update(float frames)
 	{
 		pitfall = true;
 		cout << "pit\n";
+	}
+	else if (state == -2) //bullet
+	{
+		health--;
 	}
 
 	if (health <= 0)

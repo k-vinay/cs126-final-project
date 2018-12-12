@@ -14,7 +14,6 @@ class Player
 
 	HitBox hitbox;
 	int health;
-	Gun gun;
 
 	bool keyDown[255];
 	bool mouse[3];
@@ -25,7 +24,11 @@ class Player
 	bool is_zoomed;
 	bool is_jumping;
 	bool pitfall;
-	
+
+	bool can_shoot;
+	float shoot_delay_frames = 20;
+	float frames_since_last_shot;
+
 	ofVec3f speed;
 	ofVec3f last_ground;
 

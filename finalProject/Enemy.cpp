@@ -39,6 +39,11 @@ void Enemy::draw()
 	//model.drawFaces();
 }
 
+void Enemy::get_hit()
+{
+	health--;
+}
+
 
 std::string Enemy::get_file()
 {
@@ -58,6 +63,11 @@ int Enemy::get_health()
 int Enemy::get_type()
 {
 	return type;
+}
+
+HitBox Enemy::get_box()
+{
+	return hitbox;
 }
 
 

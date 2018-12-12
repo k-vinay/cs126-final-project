@@ -10,6 +10,8 @@ class World
 	ofxAssimpModelLoader doors;
 	std::vector<Enemy> loaded_enemies;
 	std::vector<ofxAssimpModelLoader> loaded_enemy_models;
+	std::vector<Bullet> bullets;
+	ofxAssimpModelLoader bullet_model;
 	
 	Room* loaded_room;
 	int enemies_alive;

@@ -10,6 +10,10 @@ const float kGundeadScale = 0.03;
 const float kMapScale = 1;
 const float kGunScale = 0.05;
 
+const float kBulletSpeed = 2;
+const float kBulletBoxSize = 2;
+const float kBulletScale = 0.01;
+
 const float kFov = 90;
 const float kZoomFov = 60;
 const float kNearClip = 0.1;

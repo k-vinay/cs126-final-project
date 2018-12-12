@@ -28,10 +28,12 @@ public:
 	void update(float frames, ofVec3f player, ofxAssimpModelLoader& model);
 
 	void draw();
+	void get_hit();
 
 	std::string get_file();
 	ofVec2f get_position();
 	int get_health();
 	int get_type();
+	HitBox get_box();
 };
 

@@ -19,20 +19,47 @@ Room::~Room()
 {
 }
 
+void Room::unload()
+{
+	bullets.clear();
+	enemies.clear();
+}
+
 void Room::addDoor(Door* door)
 {
 	doors.push_back(door);
 }
 
+void Room::addBullet(Bullet bullet)
+{
+	bullets.push_back(bullet);
+}
+
 void Room::update(float frames, bool cleared)
 {
+	for (Bullet& bullet : bullets)
+	{
+		bullet.hitbox.move(bullet.velocity.x, bullet.velocity.y, bullet.velocity.z);
+		if (!room.contains(bullet.hitbox))
+			bullet.is_active = false;
+		else
+		{
+			for (Enemy& enemy : enemies)
+			{
+				if (bullet.is_active && enemy.get_health()>0 && bullet.hitbox.IsHitting(enemy.get_box()))
+				{
+					bullet.is_active = false;
+					enemy.get_hit();
+				}
+			}
+		}
+		
+	}
 	is_cleared = cleared;
 }
 
 void Room::draw()
 {
-	//for (Enemy enemy : enemies)
-		//enemy.draw();
 }
 
 bool Room::isValidPosition(HitBox player)
@@ -79,6 +106,11 @@ ofVec2f Room::get_big_corner()
 	return ofVec2f();
 }
 
+std::vector<Bullet> Room::get_bullets()
+{
+	return bullets;
+}
+
 std::vector<ofVec2f> Room::get_doors()
 {
 	return std::vector<ofVec2f>();
@@ -108,6 +140,8 @@ Room * Door::useDoor(Room * current_room, HitBox player)
 {
 	if (player.IsHitting(current_room->get_box()))
 		return current_room;
+
+	current_room->unload();
 
 	if (current_room == room1)
 		return room2;

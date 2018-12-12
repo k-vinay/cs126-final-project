@@ -23,13 +23,19 @@ void World::setup()
 	doors.setRotation(0, 90, 1, 0, 0);
 	doors.setScale(kMapScale, kMapScale, kMapScale);
 
+	bullet_model.loadModel("bullet.dae");
+	bullet_model.setScale(kBulletScale, kBulletScale, kBulletScale);
+	
 	current_room = &startRoom;
 }
 
 void World::update(float frames)
 {
+	loaded_enemies = current_room->get_enemies();
 	if (loaded_room != current_room)
 		loadRoom();
+
+	bullets = current_room->get_bullets();
 
 	enemies_alive = loaded_enemies.size();
 	for (int i = 0; i < loaded_enemies.size(); i++)
@@ -75,13 +81,27 @@ void World::draw()
 
 	current_room->draw();
 
+	for (Bullet bullet : bullets)
+	{
+		if (bullet.is_active)
+		{
+			ofVec3f pos = bullet.hitbox.get_position();
+			bullet_model.setPosition(pos.x, pos.y, pos.z);
+			bullet_model.drawVertices();
+		}
+	}
+
 	ofLight enemy_light;
 	enemy_light.enable();
-	for (ofxAssimpModelLoader model : loaded_enemy_models)
+	for (int i = 0; i < loaded_enemy_models.size(); i++)
 	{
+		ofxAssimpModelLoader model = loaded_enemy_models[i];
+		Enemy enemy = loaded_enemies[i];
+
 		enemy_light.setPosition(model.getPosition());
 		enemy_light.move({ 0,0,5 });
-		model.drawFaces();
+		if (enemy.get_health() > 0)
+			model.drawFaces();
 	}
 	enemy_light.disable();
 
