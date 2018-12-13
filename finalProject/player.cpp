@@ -50,6 +50,7 @@ void Player::update(float frames)
 
 	frames_since_last_shot += frames;
 	can_shoot = frames_since_last_shot > shoot_delay_frames;
+	frames_since_last_damage += frames;
 
 	if (is_jumping)
 	{
@@ -85,6 +86,7 @@ void Player::update(float frames)
 			setPosition(last_ground);
 			speed.z = 0;
 			health--;
+			frames_since_last_damage = 0;
 		}
 
 		is_zoomed = false;
@@ -158,7 +160,11 @@ void Player::update(float frames)
 	}
 	else if (state == -2) //bullet
 	{
-		health--;
+		if (frames_since_last_damage > iframes)
+		{
+			health--;
+			frames_since_last_damage = 0;
+		}
 	}
 
 	if (health <= 0)

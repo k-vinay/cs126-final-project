@@ -38,12 +38,16 @@ void ofApp::draw()
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key)
 {
+	if (key >= 255)
+		return;
 	player.keyPressed(key);
 }
 
 //--------------------------------------------------------------
 void ofApp::keyReleased(int key)
 {
+	if (key >= 255)
+		return;
 	player.keyReleased(key);
 }
 

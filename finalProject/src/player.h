@@ -29,6 +29,8 @@ class Player
 	float shoot_delay_frames = 20;
 	float frames_since_last_shot;
 
+	float frames_since_last_damage;
+
 	ofVec3f speed;
 	ofVec3f last_ground;
 
