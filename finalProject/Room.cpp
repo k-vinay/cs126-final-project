@@ -73,7 +73,7 @@ int Room::isValidPosition(HitBox player)
 	}
 	for (Enemy enemy : enemies)
 	{
-		if (enemy.get_box().IsHitting(player) && enemy.get_health() > 0)
+		if ((enemy.get_health() > 0) && enemy.get_box().IsHitting(player))
 			return -1;
 	}
 	return 1;
@@ -90,7 +90,7 @@ int Room::getState(HitBox player)
 	}
 	for (Enemy enemy : enemies)
 	{
-		if (enemy.get_box().IsHitting(player))
+		if ((enemy.get_health() > 0) && enemy.get_box().IsHitting(player))
 			return -2;
 	}
 	return 0;

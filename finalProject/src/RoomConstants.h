@@ -45,14 +45,23 @@ Room hallway3({ -110,-307 }, { -85,-234 }, {}, {}, {});
 Door door5({ -110 + kHitboxDims.x, -234 - kHitboxDims.y, 0 }, { -85 - kHitboxDims.x, -234 + kHitboxDims.y, 2 * kHeight }, &room2, &hallway3);
 Door door6({ -110 + kHitboxDims.x, -307 - kHitboxDims.y, 0 }, { -85 - kHitboxDims.x, -307 + kHitboxDims.y, 2 * kHeight }, &hallway3, &room3);
 
-Room room4({ 12,-480 }, { 185,-283 }, {}, {
+Room room4({ 12,-480 }, { 185,-283 }, {
+	Enemy(-90,1,{80,-400})
+	}, {
 	HitBox({37,-357,0},{160,-308,kWallHeight})
 	}, {});
 Room hallway4({ -85,-380 }, { 12,-357 }, {}, {}, {});
 Door door7({ -85 - kHitboxDims.x, -381 + kHitboxDims.y, 0 }, { -85 + kHitboxDims.x, -357 - kHitboxDims.y, 2 * kHeight }, &room3, &hallway4);
 Door door8({ 12 - kHitboxDims.x, -381 + kHitboxDims.y, 0 }, { 12 + kHitboxDims.x, -357 - kHitboxDims.y, 2 * kHeight }, &hallway4, &room4);
 
-Room room5({ -258,-61 }, { -86,283 }, {}, {}, {
+Room room5({ -258,-61 }, { -86,283 }, {
+	Enemy(0,1,{-180,70}),
+	Enemy(0,1,{-180,150}),
+	Enemy(0,1,{-100,70}),
+	Enemy(0,1,{-100,150}),
+	Enemy(0,1,{-220,70}),
+	Enemy(0,1,{-220,150}),
+	}, {}, {
 	HitBox({ -209,-12,0 },{ -135,36,kPitBoxHeight }),
 	HitBox({ -209,86,0 },{ -135,136,kPitBoxHeight }),
 	HitBox({ -209,185,0 },{ -135,234,kPitBoxHeight })
@@ -66,7 +75,9 @@ Room hallway6({ -184,-160 }, { -160,-61 }, {}, {}, {});
 Door door11({ -184 + kHitboxDims.x, -160 - kHitboxDims.y, 0 }, { -160 - kHitboxDims.x, -160 + kHitboxDims.y, 2 * kHeight }, &room2, &hallway6);
 Door door12({ -184 + kHitboxDims.x, -61 - kHitboxDims.y, 0 }, { -160 - kHitboxDims.x, -61 + kHitboxDims.y, 2 * kHeight }, &hallway6, &room5);
 
-Room room6({ 61,-259 }, { 185,-135 }, {}, {
+Room room6({ 61,-259 }, { 185,-135 }, {
+	Enemy(90,1,{145,-170})
+	}, {
 	HitBox({ 86,-209,0 },{ 160,-184,kWallHeight }),
 	HitBox({ 110,-233,0 },{ 135,-160,kWallHeight })
 	}, {});
@@ -74,7 +85,9 @@ Room hallway7({ 160,-283 }, { 185,-259 }, {}, {}, {});
 Door door13({ 160 + kHitboxDims.x, -283 - kHitboxDims.y, 0 }, { 185 - kHitboxDims.x, -283 + kHitboxDims.y, 2 * kHeight }, &room4, &hallway7);
 Door door14({ 160 + kHitboxDims.x, -259 - kHitboxDims.y, 0 }, { 185 - kHitboxDims.x, -259 + kHitboxDims.y, 2 * kHeight }, &hallway7, &room6);
 
-Room room7({ 37,-61 }, { 185,37 }, {}, {}, {});
+Room room7({ 37,-61 }, { 185,37 }, {
+	Enemy(-45,1,{140,0})
+	}, {}, {});
 Room hallway8({ 110,-135 }, { 135,-61 }, {}, {}, {});
 Door door15({ 110 + kHitboxDims.x, -135 - kHitboxDims.y, 0 }, { 135 - kHitboxDims.x, -135 + kHitboxDims.y, 2 * kHeight }, &room6, &hallway8);
 Door door16({ 110 + kHitboxDims.x, -61 - kHitboxDims.y, 0 }, { 135 - kHitboxDims.x, -61 + kHitboxDims.y, 2 * kHeight }, &hallway8, &room7);
@@ -94,7 +107,9 @@ Room hallway10({ 86,37 }, { 110,61 }, {}, {}, {});
 Door door19({ 86 + kHitboxDims.x, 37 - kHitboxDims.y, 0 }, { 110 - kHitboxDims.x, 37 + kHitboxDims.y, 2 * kHeight }, &room7, &hallway10);
 Door door20({ 86 + kHitboxDims.x, 61 - kHitboxDims.y, 0 }, { 110 - kHitboxDims.x, 61 + kHitboxDims.y, 2 * kHeight }, &hallway10, &room8);
 
-Room room9({ 37,234 }, { 135,332 }, {}, {}, {});
+Room room9({ 37,234 }, { 135,332 }, {
+	Enemy(-90,2,{-100,305})
+	}, {}, {});
 Room hallway11({ -12,136 }, { 37, 307 }, {}, {
 	HitBox({ 12,160,0 },{ 37,283,kWallHeight })
 	}, {});
@@ -106,7 +121,20 @@ Room hallway12({ 135,283 }, { 209,307 }, {}, {}, {});
 Door door23({ 135 - kHitboxDims.x, 283 + kHitboxDims.y, 0 }, { 135 + kHitboxDims.x, 307 - kHitboxDims.y, 2 * kHeight }, &room9, &hallway12);
 Door door24({ 209 - kHitboxDims.x, 283 + kHitboxDims.y, 0 }, { 209 + kHitboxDims.x, 307 - kHitboxDims.y, 2 * kHeight }, &hallway12, &room10);
 
-Room room11({ 209,-259 }, { 480,209 }, {}, {}, {});
+Room room11({ 209,-259 }, { 480,209 }, {
+	Enemy(180,2,{240,-200}),
+	Enemy(180,2,{320,-200}),
+	Enemy(180,2,{400,-200}),
+	Enemy(180,2,{240,-100}),
+	Enemy(180,2,{320,-100}),
+	Enemy(180,2,{400,-100}),
+	Enemy(180,2,{240, 0}),
+	Enemy(180,2,{320, 0}),
+	Enemy(180,2,{400, 0}),
+	Enemy(180,2,{240, 100}),
+	Enemy(180,2,{320, 100}),
+	Enemy(180,2,{400, 100}),
+	}, {}, {});
 Room hallway13({ 234,209 }, { 283,258 }, {}, {}, {});
 Door door25({ 234 + kHitboxDims.x, 258 - kHitboxDims.y, 0 }, { 283 - kHitboxDims.x, 258 + kHitboxDims.y, 2 * kHeight }, &room10, &hallway13);
 Door door26({ 234 + kHitboxDims.x, 209 - kHitboxDims.y, 0 }, { 283 - kHitboxDims.x, 209 + kHitboxDims.y, 2 * kHeight }, &hallway13, &room11);
