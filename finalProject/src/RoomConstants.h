@@ -108,7 +108,7 @@ Door door19({ 86 + kHitboxDims.x, 37 - kHitboxDims.y, 0 }, { 110 - kHitboxDims.x
 Door door20({ 86 + kHitboxDims.x, 61 - kHitboxDims.y, 0 }, { 110 - kHitboxDims.x, 61 + kHitboxDims.y, 2 * kHeight }, &hallway10, &room8);
 
 Room room9({ 37,234 }, { 135,332 }, {
-	Enemy(-90,2,{-100,305})
+	Enemy(-90,2,{100,305})
 	}, {}, {});
 Room hallway11({ -12,136 }, { 37, 307 }, {}, {
 	HitBox({ 12,160,0 },{ 37,283,kWallHeight })
