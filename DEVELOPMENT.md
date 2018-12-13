@@ -12,3 +12,8 @@ commits up to 12/9/18:
   finished collision detection for rooms,
   mapped out room coordinates, added them to the program,
   completed map so you can now explore everywhere properly
+
+commits up to 12/12/18:
+  added in enemies and bullets,
+  added in health for the player, which drops upon enemy contact or falling into pits
+  doors close with enemies present
