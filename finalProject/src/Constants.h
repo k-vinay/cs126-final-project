@@ -4,14 +4,15 @@
 const int kStartHealth = 6; //do not go above 6
 
 const float kDefaultFramerate = 60.0;
-const float iframes = 180;
+const float iframes = 130;
+const float kFlashFrames = 15;
 
 const float kGundeadScale = 0.03;
 const float kMapScale = 1;
 const float kGunScale = 0.05;
 
 const float kBulletSpeed = 5;
-const float kBulletBoxSize = 4;
+const float kBulletBoxSize = 6;
 const float kBulletScale = 0.006;
 
 const float kFov = 90;
@@ -53,12 +54,12 @@ const EnemyData kEnemyData[kEnemyTypes] = {
 			"bullet-kin.dae",
 			3,
 			Gun(),
-			{ kHeight/2,kHeight/2,kHeight }
+			{ kHeight,kHeight,kHeight*1.8 }
 		},
 		{
 			"shotgun-kin.dae",
 			6,
 			Gun(),
-			{ kHeight/2,kHeight/2,kHeight*1.5 }
+			{ kHeight,kHeight,kHeight*2 }
 		}
 };

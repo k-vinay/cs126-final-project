@@ -10,9 +10,9 @@
 Room startRoom({ -480, -480 }, { -380, -380 }, {}, {}, {});
 
 Room room1({ -480,-282 }, { -308,-37 }, {
-	Enemy(1, { -440,-50 }),
-	Enemy(2, { -390,-150 }),
-	Enemy(1, { -340,-250 })
+	Enemy(0, 1, { -440,-50 }),
+	Enemy(0, 2, { -390,-150 }),
+	Enemy(-90, 1, { -340,-250 })
 	}, {}, {
 		HitBox({ -480,-209,0 }, { -455,-184,kPitBoxHeight }),
 		HitBox({ -480,-135,0 }, { -455,-110,kPitBoxHeight }),
@@ -25,12 +25,19 @@ Room hallway1({ -408, -380 }, { -380, -280 }, {}, {}, {});
 Door door1({ -408 + kHitboxDims.x, -380 - kHitboxDims.y, 0 }, { -380 - kHitboxDims.x, -380 + kHitboxDims.y, 2 * kHeight }, &startRoom, &hallway1);
 Door door2({ -408 + kHitboxDims.x, -282 - kHitboxDims.y, 0 }, { -380 - kHitboxDims.x, -282 + kHitboxDims.y, 2 * kHeight }, &hallway1, &room1);
 
-Room room2({ -184,-234 }, { -37,-160 }, {}, {}, {});
+Room room2({ -184,-234 }, { -37,-160 }, {
+	Enemy(-90,2,{-85,-197})
+	}, {}, {});
 Room hallway2({ -308,-184 }, { -184,-160 }, {}, {}, {});
 Door door3({ -308 - kHitboxDims.x, -184 + kHitboxDims.y, 0 }, { -308 + kHitboxDims.x, -160 - kHitboxDims.y, 2 * kHeight }, &room1, &hallway2);
 Door door4({ -184 - kHitboxDims.x, -184 + kHitboxDims.y, 0 }, { -184 + kHitboxDims.x, -160 - kHitboxDims.y, 2 * kHeight }, &hallway2, &room2);
 
-Room room3({ -357,-480 }, { -85,-307 }, {}, {}, { 
+Room room3({ -357,-480 }, { -85,-307 }, {
+	Enemy(180,1,{-120,-440}),
+	Enemy(120,1,{-220,-440}),
+	Enemy(90,2,{-320,-340}),
+	Enemy(100,2,{-320,-440})
+	}, {}, { 
 	HitBox({ -283,-480,0 },{ -258,-307,kPitBoxHeight }),
 	HitBox({ -184,-480,0 },{ -160,-307,kPitBoxHeight })
 	});

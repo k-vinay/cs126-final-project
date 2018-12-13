@@ -60,9 +60,9 @@ void World::loadRoom()
 		model.setRotation(0, 90, 1, 0, 0);
 		
 		if (enemy.get_type() == 0)  //bullet
-			model.setRotation(1, 180, 0, 1, 0);
+			model.setRotation(1, enemy.get_direction()+180, 0, 1, 0);
 		else if (enemy.get_type() == 1)  //shotgun
-			model.setRotation(1, 90, 0, 1, 0);
+			model.setRotation(1, enemy.get_direction()+90, 0, 1, 0);
 		
 		model.setScale(kGundeadScale, kGundeadScale, kGundeadScale);
 		loaded_enemy_models.push_back(model);

@@ -193,7 +193,15 @@ void Player::end()
 	camera.end();
 	camera.setFov(kFov);
 	
-	health_bar[health].draw(0, 0);
+	if(frames_since_last_damage>iframes)
+		health_bar[health].draw(0, 0);
+	else
+	{
+		int f = (int)(frames_since_last_damage/kFlashFrames);
+		if (f%2 == 1)
+			health_bar[health].draw(0, 0);
+	}
+	
 	if (is_zoomed)
 		zoomed_hud.draw(0, 0);
 	else
@@ -226,7 +234,7 @@ void Player::move(ofVec3f displacement)
 	if (can_move_y == 1)
 		camera.move({ 0,displacement.y,0 });
 
-	if (!is_jumping && (can_move_x == -1 || can_move_y == -1) && frames_since_last_damage > iframes)
+	if ((can_move_x == -1 || can_move_y == -1) && frames_since_last_damage > iframes)
 	{
 		health--;
 		frames_since_last_damage = 0;

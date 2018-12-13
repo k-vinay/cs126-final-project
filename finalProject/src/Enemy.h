@@ -20,9 +20,11 @@ class Enemy
 	bool is_i_frame;
 	float time_since_hit;
 
+	float direction;
+
 public:
 	Enemy();
-	Enemy(int type, ofVec2f spawn);
+	Enemy(float dir, int type, ofVec2f spawn);
 	~Enemy();
 
 	void update(float frames, ofVec3f player, ofxAssimpModelLoader& model);
@@ -32,6 +34,7 @@ public:
 
 	std::string get_file();
 	ofVec2f get_position();
+	float get_direction();
 	int get_health();
 	int get_type();
 	HitBox get_box();

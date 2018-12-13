@@ -4,9 +4,10 @@ Enemy::Enemy()
 {
 }
 
-Enemy::Enemy(int t, ofVec2f spawn)
+Enemy::Enemy(float dir, int t, ofVec2f spawn)
 {
 	type = (t - 1) % kEnemyTypes;
+	direction = dir;
 
 	model_file = kEnemyData[type].filename;
 	health = kEnemyData[type].health;
@@ -53,6 +54,11 @@ std::string Enemy::get_file()
 ofVec2f Enemy::get_position()
 {
 	return { hitbox.get_position().x, hitbox.get_position().y };
+}
+
+float Enemy::get_direction()
+{
+	return direction;
 }
 
 int Enemy::get_health()
