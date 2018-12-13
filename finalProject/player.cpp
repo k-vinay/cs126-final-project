@@ -211,20 +211,26 @@ void Player::draw()
 
 void Player::move(ofVec3f displacement)
 {
-	hitbox.move(displacement.x, 0,0);
-	bool can_move_x = world_ptr->current_room->isValidPosition(hitbox);
-	if (!can_move_x)
+	hitbox.move(displacement.x, 0, 0);
+	int can_move_x = world_ptr->current_room->isValidPosition(hitbox);
+	if (can_move_x != 1)
 		hitbox.move(-displacement.x, 0, 0);
 
 	hitbox.move(0, displacement.y, 0);
-	bool can_move_y = world_ptr->current_room->isValidPosition(hitbox);
-	if (!can_move_y)
+	int can_move_y = world_ptr->current_room->isValidPosition(hitbox);
+	if (can_move_y != 1)
 		hitbox.move(0, -displacement.y, 0);
 
-	if (can_move_x)
+	if (can_move_x == 1)
 		camera.move({ displacement.x,0,0 });
-	if (can_move_y)
+	if (can_move_y == 1)
 		camera.move({ 0,displacement.y,0 });
+
+	if (!is_jumping && (can_move_x == -1 || can_move_y == -1) && frames_since_last_damage > iframes)
+	{
+		health--;
+		frames_since_last_damage = 0;
+	}
 
 	hitbox.move(0, 0, displacement.z);
 	camera.move({ 0,0,displacement.z });

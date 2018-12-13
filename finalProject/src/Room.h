@@ -64,7 +64,7 @@ public:
 
 	void draw();
 
-	bool isValidPosition(HitBox player);
+	int isValidPosition(HitBox player);
 	int getState(HitBox player);
 	Door* isInDoor(HitBox player);
 

@@ -26,7 +26,7 @@ class Player
 	bool pitfall;
 
 	bool can_shoot;
-	float shoot_delay_frames = 20;
+	float shoot_delay_frames = 15;
 	float frames_since_last_shot;
 
 	float frames_since_last_damage;

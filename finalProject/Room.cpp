@@ -62,16 +62,21 @@ void Room::draw()
 {
 }
 
-bool Room::isValidPosition(HitBox player)
+int Room::isValidPosition(HitBox player)
 {
 	if (!room.contains(player) && !(isInDoor(player) && is_cleared))
-		return false;
+		return 0;
 	for (HitBox wall : walls)
 	{
 		if (wall.IsHitting(player))
-			return false;
+			return 0;
 	}
-	return true;
+	for (Enemy enemy : enemies)
+	{
+		if (enemy.get_box().IsHitting(player) && enemy.get_health() > 0)
+			return -1;
+	}
+	return 1;
 }
 
 int Room::getState(HitBox player)
@@ -82,6 +87,11 @@ int Room::getState(HitBox player)
 	{
 		if (pit.contains(player))
 			return -1;
+	}
+	for (Enemy enemy : enemies)
+	{
+		if (enemy.get_box().IsHitting(player))
+			return -2;
 	}
 	return 0;
 }
